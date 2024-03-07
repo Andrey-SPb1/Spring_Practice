@@ -14,7 +14,6 @@ public class InjectBeanPostProcessor implements BeanPostProcessor, ApplicationCo
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-
         Arrays.stream(bean.getClass().getDeclaredFields())
                 .filter(field -> field.isAnnotationPresent(InjectBean.class))
                 .forEach(field -> {
@@ -22,8 +21,12 @@ public class InjectBeanPostProcessor implements BeanPostProcessor, ApplicationCo
                     ReflectionUtils.makeAccessible(field);
                     ReflectionUtils.setField(field, bean, beanToInject);
                 });
+        return bean;
+    }
 
-        return BeanPostProcessor.super.postProcessBeforeInitialization(bean, beanName);
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        return bean;
     }
 
     @Override

@@ -13,6 +13,9 @@
 <!--        <property name="locations" value="application.properties"/>-->
 <!--    </bean>-->
 
+    <bean class="org.andrey.spring.bfpp.LogBeanFactoryPostProcessor"/>
+    <bean class="org.andrey.spring.bfpp.VerifyBeanFactoryPostProcessor"/>
+
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="${db.driver}"/>
     </bean>
@@ -36,8 +39,8 @@
         </constructor-arg>
         <property name="properties">
             <map>
-                <entry key="url" value="postgresurl"/>
-                <entry key="password" value="1234"/>
+                <entry key="url" value="${db.url}"/>
+                <entry key="password" value="${db.password}"/>
                 <entry key="driver" value-ref="driver"/>
                 <entry key="test" value="#{driver.length() > T(Math).random() * 10}"/>
                 <entry key="test2" value="#{'${db.hosts}'.split(',')}"/>

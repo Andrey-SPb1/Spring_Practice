@@ -6,6 +6,6 @@ public interface CrudRepository <K, E> {
 
     Optional<E> findById(K id);
 
-    void delete();
+    void delete(E entity);
 
 }

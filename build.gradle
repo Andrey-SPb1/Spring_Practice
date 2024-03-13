@@ -18,6 +18,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
+ wrapper {
+     gradleVersion '8.0'
+ }
+
 test {
     useJUnitPlatform()
 }

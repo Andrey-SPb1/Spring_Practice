@@ -1,14 +1,14 @@
 package org.andrey.spring.config;
 
 import org.andrey.spring.database.repository.CrudRepository;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.PropertySource;
+import org.andrey.web.config.WebConfiguration;
+import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Component;
 
 import static org.springframework.context.annotation.ComponentScan.*;
 
+//@ImportResource(value = "classpath:application.xml")
+@Import(WebConfiguration.class)
 @Configuration
 @PropertySource("classpath:application.properties")
 @ComponentScan(basePackages = "org.andrey.spring",

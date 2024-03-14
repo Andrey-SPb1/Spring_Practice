@@ -13,7 +13,7 @@ import static org.springframework.context.annotation.ComponentScan.*;
 
 //@ImportResource(value = "classpath:application.xml")
 @Import(WebConfiguration.class)
-@Configuration
+@Configuration(proxyBeanMethods = true)
 @PropertySource("classpath:application.properties")
 @ComponentScan(basePackages = "org.andrey.spring",
         useDefaultFilters = false,
@@ -29,9 +29,19 @@ public class ApplicationConfiguration {
         public ConnectionPool pool2(@Value("${db.username}") String username) {
                 return new ConnectionPool(username, 20);
         }
+        @Bean
+        public ConnectionPool pool3() {
+                return new ConnectionPool("username", 25);
+        }
 
         @Bean
         public UserRepository userRepository2(ConnectionPool pool2) {
                 return new UserRepository(pool2);
+        }
+        @Bean
+        public UserRepository userRepository3() {
+                ConnectionPool connectionPool = pool3();
+                ConnectionPool connectionPool2 = pool3();
+                return new UserRepository(pool3());
         }
 }

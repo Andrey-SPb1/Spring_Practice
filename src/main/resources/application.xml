@@ -17,8 +17,6 @@
         <context:include-filter type="regex" expression="com\..+Repository"/>
     </context:component-scan>
 
-    <context:property-placeholder location="classpath:application.properties"/>
-
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="${db.driver}"/>
     </bean>

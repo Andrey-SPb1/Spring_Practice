@@ -2,7 +2,9 @@ package org.andrey.spring;
 
 import org.andrey.spring.config.ApplicationConfiguration;
 import org.andrey.spring.database.pool.ConnectionPool;
+import org.andrey.spring.database.repository.CompanyRepository;
 import org.andrey.spring.database.repository.CrudRepository;
+import org.andrey.spring.service.CompanyService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
@@ -15,8 +17,8 @@ public class ApplicationRunner {
             context.refresh();
             ConnectionPool connectionPool = context.getBean("pool1", ConnectionPool.class);
 
-            CrudRepository companyRepository = context.getBean("companyRepository", CrudRepository.class);
-            System.out.println(companyRepository.findById(1));
+            CompanyService companyService = context.getBean(CompanyService.class);
+            System.out.println(companyService.findById(1));
         }
     }
 }

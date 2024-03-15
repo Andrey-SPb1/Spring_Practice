@@ -38,7 +38,9 @@ public class ApplicationConfiguration {
         public UserRepository userRepository2(ConnectionPool pool2) {
                 return new UserRepository(pool2);
         }
+
         @Bean
+        @Profile("prod|web")
         public UserRepository userRepository3() {
                 ConnectionPool connectionPool = pool3();
                 ConnectionPool connectionPool2 = pool3();

@@ -1,10 +1,10 @@
 package org.andrey.spring.config;
 
+import jakarta.annotation.PostConstruct;
 import org.andrey.spring.config.condition.JpaCondition;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.PostConstruct;
 
 @Conditional(JpaCondition.class)
 @Configuration

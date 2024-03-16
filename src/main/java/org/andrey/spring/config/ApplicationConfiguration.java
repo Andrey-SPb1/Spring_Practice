@@ -9,7 +9,6 @@ import org.springframework.context.annotation.*;
 
 @Import(WebConfiguration.class)
 @Configuration(proxyBeanMethods = true)
-@PropertySource("classpath:application.properties")
 public class ApplicationConfiguration {
 
         @Bean("pool2")

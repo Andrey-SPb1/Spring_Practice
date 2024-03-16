@@ -2,6 +2,8 @@ package org.andrey.spring.config;
 
 import jakarta.annotation.PostConstruct;
 import org.andrey.spring.config.condition.JpaCondition;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 

@@ -3,9 +3,11 @@ package org.andrey.spring.database.pool;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component("pool1")
 @RequiredArgsConstructor
 public class ConnectionPool {
@@ -17,11 +19,11 @@ public class ConnectionPool {
 
     @PostConstruct
     private void init() {
-        System.out.println("Init connection pool");
+        log.info("Init connection pool");
     }
 
     @PreDestroy
     private void destroy() {
-        System.out.println("Clean connection pool");
+        log.info("Clean connection pool");
     }
 }

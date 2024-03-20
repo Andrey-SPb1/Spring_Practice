@@ -2,6 +2,7 @@ package org.andrey.spring.database.repository;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.andrey.spring.bpp.Auditing;
 import org.andrey.spring.bpp.Transaction;
 import org.andrey.spring.database.entity.Company;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Repository
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Transaction
@@ -28,7 +30,7 @@ public class CompanyRepository implements CrudRepository<Integer, Company> {
 
     @PostConstruct
     private void init() {
-        System.out.println("init company repository");
+        log.info("init company repository");
     }
 
     @Override

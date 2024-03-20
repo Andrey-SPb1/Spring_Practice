@@ -25,3 +25,6 @@ logging:
   level:
     root: warn
     org.andrey.spring.database.pool: info
+  file:
+    name: andrey-spring.log
+    path: /

@@ -1,0 +1,6 @@
+2024-03-20T14:36:39.631+03:00  INFO 9300 --- [main] o.a.spring.database.pool.ConnectionPool  : Init connection pool
+2024-03-20T14:36:39.658+03:00  INFO 9300 --- [main] o.a.spring.database.pool.ConnectionPool  : Init connection pool
+2024-03-20T14:36:39.662+03:00  INFO 9300 --- [main] o.a.spring.database.pool.ConnectionPool  : Init connection pool
+2024-03-20T14:36:40.080+03:00  INFO 9300 --- [SpringApplicationShutdownHook] o.a.spring.database.pool.ConnectionPool  : Clean connection pool
+2024-03-20T14:36:40.081+03:00  INFO 9300 --- [SpringApplicationShutdownHook] o.a.spring.database.pool.ConnectionPool  : Clean connection pool
+2024-03-20T14:36:40.084+03:00  INFO 9300 --- [SpringApplicationShutdownHook] o.a.spring.database.pool.ConnectionPool  : Clean connection pool

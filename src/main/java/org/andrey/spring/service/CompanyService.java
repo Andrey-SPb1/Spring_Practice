@@ -1,8 +1,7 @@
 package org.andrey.spring.service;
 
 import lombok.RequiredArgsConstructor;
-import org.andrey.spring.database.entity.Company;
-import org.andrey.spring.database.repository.CrudRepository;
+import org.andrey.spring.database.repository.CompanyRepository;
 import org.andrey.spring.dto.CompanyReadDto;
 import org.andrey.spring.listener.AccessType;
 import org.andrey.spring.listener.EntityEvent;
@@ -15,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CompanyService {
 
-    private final CrudRepository<Integer, Company> companyRepository;
+    private final CompanyRepository companyRepository;
     private final UserService userService;
     private final ApplicationEventPublisher eventPublisher;
 

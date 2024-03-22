@@ -1,7 +1,9 @@
 package org.andrey.spring.database.repository;
 
+import org.andrey.spring.database.entity.Role;
 import org.andrey.spring.database.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -18,5 +20,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     nativeQuery = true)
     List<User> findAllByUsername(String username);
 
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
+    @Query("update User u " +
+            "set u.role = :role " +
+            "where u.id in (:ids)")
+    int updateRole(Role role, Long... ids);
 
 }

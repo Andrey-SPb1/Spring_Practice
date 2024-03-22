@@ -8,6 +8,7 @@ import org.andrey.spring.integration.annotation.IT;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -23,9 +24,12 @@ class UserRepositoryTest {
     void checkUpdate() {
         User ivan = userRepository.getById(1L);
         assertSame(Role.ADMIN, ivan.getRole());
+        ivan.setBirthDate(LocalDate.now());
 
         int resultCount = userRepository.updateRole(Role.USER, 1L, 5L);
         assertEquals(2, resultCount);
+
+        ivan.getCompany().getName(); // LazyInitializationException
 
         User ivan2 = userRepository.getById(1L);
         assertSame(Role.USER, ivan2.getRole());

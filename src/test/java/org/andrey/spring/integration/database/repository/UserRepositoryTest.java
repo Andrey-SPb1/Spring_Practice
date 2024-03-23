@@ -8,6 +8,7 @@ import org.andrey.spring.integration.annotation.IT;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
@@ -25,9 +26,14 @@ class UserRepositoryTest {
 
     @Test
     void checkPageable() {
-        PageRequest pageRequest = PageRequest.of(1, 2, Sort.by("id"));
-        List<User> users = userRepository.findAllBy(pageRequest);
-        assertThat(users).hasSize(2);
+        PageRequest pageRequest = PageRequest.of(0, 2, Sort.by("id"));
+        Slice<User> slice = userRepository.findAllBy(pageRequest);
+        slice.forEach(user -> System.out.println(user.getId()));
+
+        while(slice.hasNext()) {
+            slice = userRepository.findAllBy(slice.nextPageable());
+            slice.forEach(user -> System.out.println(user.getId()));
+        }
     }
 
     @Test

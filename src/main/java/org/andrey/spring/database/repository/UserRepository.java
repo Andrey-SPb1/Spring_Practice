@@ -1,15 +1,14 @@
 package org.andrey.spring.database.repository;
 
+import jakarta.persistence.LockModeType;
+import jakarta.persistence.QueryHint;
 import org.andrey.spring.database.entity.Role;
 import org.andrey.spring.database.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -35,6 +34,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findTopByOrderByIdDesc();
 
+    @QueryHints(@QueryHint(name = "org.hibernate.fetchSize", value = "50"))
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     List<User> findTop3ByBirthDateBefore(LocalDate date, Sort sort);
 
     @EntityGraph(attributePaths = {"company", "company.locales"})

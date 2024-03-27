@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.andrey.spring.database.entity.Role;
 import org.andrey.spring.database.entity.User;
 import org.andrey.spring.database.repository.UserRepository;
+import org.andrey.spring.dto.PersonalInfo;
+import org.andrey.spring.dto.PersonalInfo2;
 import org.andrey.spring.integration.annotation.IT;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRepositoryTest {
 
     private final UserRepository userRepository;
+
+    @Test
+    void checkProjection() {
+//        List<PersonalInfo> users = userRepository.findAllByCompanyId(1, PersonalInfo.class);
+//        assertThat(users).hasSize(2);
+
+        List<PersonalInfo2> users = userRepository.findAllByCompanyId(1);
+        assertThat(users).hasSize(2);
+    }
 
     @Test
     void checkPageable() {

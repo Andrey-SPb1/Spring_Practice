@@ -4,10 +4,9 @@ import jakarta.persistence.LockModeType;
 import jakarta.persistence.QueryHint;
 import org.andrey.spring.database.entity.Role;
 import org.andrey.spring.database.entity.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
-import org.springframework.data.domain.Sort;
+import org.andrey.spring.dto.PersonalInfo;
+import org.andrey.spring.dto.PersonalInfo2;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAllBy(String firstname, String lastname);
 
     @Query(value = "SELECT u.* FROM User u WHERE u.username = :username",
-    nativeQuery = true)
+            nativeQuery = true)
     List<User> findAllByUsername(String username);
 
     @Modifying(clearAutomatically = true, flushAutomatically = true)
@@ -40,6 +39,16 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @EntityGraph(attributePaths = {"company", "company.locales"})
     @Query(value = "select u from User u",
-    countQuery = "select count(distinct u.firstname) from User u ")
+            countQuery = "select count(distinct u.firstname) from User u ")
     Page<User> findAllBy(Pageable pageable);
+
+//    <T> List<T> findAllByCompanyId(Integer companyId, Class<T> clazz);
+
+    @Query(value = "SELECT firstname, " +
+            "lastname, " +
+            "birth_date birthDate " +
+            "FROM Users " +
+            "WHERE company_id = :companyId",
+            nativeQuery = true)
+    List<PersonalInfo2> findAllByCompanyId(Integer companyId);
 }

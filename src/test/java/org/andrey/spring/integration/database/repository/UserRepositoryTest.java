@@ -6,6 +6,7 @@ import org.andrey.spring.database.entity.User;
 import org.andrey.spring.database.repository.UserRepository;
 import org.andrey.spring.dto.PersonalInfo;
 import org.andrey.spring.dto.PersonalInfo2;
+import org.andrey.spring.dto.UserFilter;
 import org.andrey.spring.integration.annotation.IT;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRepositoryTest {
 
     private final UserRepository userRepository;
+
+    @Test
+    void checkCustomImplementation() {
+        UserFilter filter = new UserFilter(null, "%ov%", LocalDate.now());
+        List<User> users = userRepository.findAllByFilter(filter);
+        System.out.println();
+    }
 
     @Test
     void checkProjection() {

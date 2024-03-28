@@ -29,6 +29,12 @@ class UserRepositoryTest {
     private final UserRepository userRepository;
 
     @Test
+    void checkJdbcTemplate() {
+        List<PersonalInfo> users = userRepository.findAllByCompanyAndRole(1, Role.ADMIN);
+        assertThat(users).hasSize(1);
+    }
+
+    @Test
     @Commit
     void checkAuditing() {
         User user = userRepository.findById(1L).get();

@@ -1,6 +1,6 @@
 package org.andrey.spring.integration.database.repository;
 
-import jakarta.persistence.EntityManager;
+import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.andrey.spring.database.entity.Company;
 import org.andrey.spring.database.repository.CompanyRepository;

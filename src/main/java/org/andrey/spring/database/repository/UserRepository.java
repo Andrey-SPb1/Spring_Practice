@@ -1,13 +1,14 @@
 package org.andrey.spring.database.repository;
 
-import jakarta.persistence.LockModeType;
-import jakarta.persistence.QueryHint;
+import javax.persistence.LockModeType;
+import javax.persistence.QueryHint;
 import org.andrey.spring.database.entity.Role;
 import org.andrey.spring.database.entity.User;
 import org.andrey.spring.dto.PersonalInfo;
 import org.andrey.spring.dto.PersonalInfo2;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.history.RevisionRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,8 @@ import java.util.Optional;
 public interface UserRepository extends
         JpaRepository<User, Long>,
         FilterUserRepository,
-        RevisionRepository<User, Long, Integer> {
+        RevisionRepository<User, Long, Integer>,
+        QuerydslPredicateExecutor<User> {
 
     @Query("select u from User u " +
             "where u.firstname like %:firstname% and u.lastname like %:lastname%")

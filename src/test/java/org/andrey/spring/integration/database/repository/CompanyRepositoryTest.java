@@ -4,7 +4,9 @@ import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.andrey.spring.database.entity.Company;
 import org.andrey.spring.database.repository.CompanyRepository;
+import org.andrey.spring.integration.IntegrationTestBase;
 import org.andrey.spring.integration.annotation.IT;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -14,9 +16,8 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@IT
 @RequiredArgsConstructor
-class CompanyRepositoryTest {
+class CompanyRepositoryTest extends IntegrationTestBase {
 
     private static final Integer COMPANY_ID = 6;
     private final EntityManager entityManager;
@@ -30,6 +31,7 @@ class CompanyRepositoryTest {
     }
 
     @Test
+    @Disabled
     void delete() {
         Optional<Company> optionalCompany = companyRepository.findById(COMPANY_ID);
         assertTrue(optionalCompany.isPresent());

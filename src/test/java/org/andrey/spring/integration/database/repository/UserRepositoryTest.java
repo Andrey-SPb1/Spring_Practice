@@ -29,6 +29,13 @@ class UserRepositoryTest {
     private final UserRepository userRepository;
 
     @Test
+    void checkBatch() {
+        List<User> allUsers = userRepository.findAll();
+        userRepository.updateCompanyAndRole(allUsers);
+        System.out.println();
+    }
+
+    @Test
     void checkJdbcTemplate() {
         List<PersonalInfo> users = userRepository.findAllByCompanyAndRole(1, Role.ADMIN);
         assertThat(users).hasSize(1);

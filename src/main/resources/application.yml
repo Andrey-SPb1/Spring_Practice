@@ -24,12 +24,11 @@ spring.profiles.active: qa
 logging:
   level:
     root: INFO
-    org.andrey.spring.database.pool: INFO
+    com.dmdev.spring.database.pool: INFO
     org.springframework.jdbc.core: TRACE
   file:
-    name: andrey-spring.log
+    name: dmdev.log
     path: /
-
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5433/postgres

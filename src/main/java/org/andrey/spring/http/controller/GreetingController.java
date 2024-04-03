@@ -1,32 +1,40 @@
 package org.andrey.spring.http.controller;
 
+import org.andrey.spring.database.entity.Role;
 import org.andrey.spring.database.repository.CompanyRepository;
 import org.andrey.spring.dto.UserReadDto;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/v1")
 @SessionAttributes({"user"})
 public class GreetingController {
 
-    @GetMapping("/hello")
-    public ModelAndView hello(ModelAndView modelAndView, HttpServletRequest request) {
-        modelAndView.setViewName("greeting/hello");
-        modelAndView.addObject("user", new UserReadDto(1L, "Ivan"));
+    @ModelAttribute("roles")
+    public List<Role> roles() {
+        return Arrays.asList(Role.values());
+    }
 
-        return modelAndView;
+    @GetMapping("/hello")
+    public String hello(Model model,
+                              HttpServletRequest request,
+                              @ModelAttribute("userReadDto") UserReadDto userReadDto) {
+        model.addAttribute("user", new UserReadDto(1L, "Ivan"));
+
+        return "greeting/hello";
     }
 
     @GetMapping("/bye")
-    public ModelAndView bye(@SessionAttribute("user") UserReadDto user) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("greeting/bye");
-        return modelAndView;
+    public String bye(@SessionAttribute("user") UserReadDto user, Model model) {
+        return "greeting/bye";
     }
 
     @GetMapping("/hello/{id}")

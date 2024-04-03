@@ -1,6 +1,7 @@
 package org.andrey.spring.http.controller;
 
 import org.andrey.spring.database.repository.CompanyRepository;
+import org.andrey.spring.dto.UserReadDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,11 +11,26 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/api/v1")
+@SessionAttributes({"user"})
 public class GreetingController {
 
-//    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    @GetMapping("/hello")
+    public ModelAndView hello(ModelAndView modelAndView, HttpServletRequest request) {
+        modelAndView.setViewName("greeting/hello");
+        modelAndView.addObject("user", new UserReadDto(1L, "Ivan"));
+
+        return modelAndView;
+    }
+
+    @GetMapping("/bye")
+    public ModelAndView bye(@SessionAttribute("user") UserReadDto user) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("greeting/bye");
+        return modelAndView;
+    }
+
     @GetMapping("/hello/{id}")
-    public ModelAndView hello(ModelAndView modelAndView, HttpServletRequest request,
+    public ModelAndView hello2(ModelAndView modelAndView, HttpServletRequest request,
                               @RequestParam Integer age,
                               @RequestHeader String accept,
                               @CookieValue("JSESSIONID") String jsesseionId,
@@ -22,16 +38,8 @@ public class GreetingController {
         String ageParamValue = request.getParameter("age");
         String acceptHeader = request.getHeader("accept");
         Cookie[] cookies = request.getCookies();
-        
+
         modelAndView.setViewName("greeting/hello");
         return modelAndView;
     }
-
-    @GetMapping("/bye")
-    public ModelAndView bye() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("greeting/bye");
-        return modelAndView;
-    }
-
 }

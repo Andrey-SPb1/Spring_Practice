@@ -1,4 +1,4 @@
-package org.andrey.spring.listener;
+package org.andrey.spring.listener.entity;
 
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;

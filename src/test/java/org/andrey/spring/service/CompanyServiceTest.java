@@ -3,7 +3,7 @@ package org.andrey.spring.service;
 import org.andrey.spring.database.entity.Company;
 import org.andrey.spring.database.repository.CompanyRepository;
 import org.andrey.spring.dto.CompanyReadDto;
-import org.andrey.spring.listener.EntityEvent;
+import org.andrey.spring.listener.entity.EntityEvent;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -40,7 +40,7 @@ class CompanyServiceTest {
 
         assertTrue(actualResult.isPresent());
 
-        CompanyReadDto expectedResult = new CompanyReadDto(COMPANY_ID);
+        CompanyReadDto expectedResult = new CompanyReadDto(COMPANY_ID, null);
         actualResult.ifPresent(actual -> assertEquals(expectedResult, actual));
 
         verify(eventPublisher).publishEvent(any(EntityEvent.class));

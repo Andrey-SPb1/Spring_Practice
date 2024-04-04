@@ -1,4 +1,4 @@
-package org.andrey.spring.listener;
+package org.andrey.spring.listener.entity;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;

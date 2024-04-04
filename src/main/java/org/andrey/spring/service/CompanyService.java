@@ -3,8 +3,8 @@ package org.andrey.spring.service;
 import lombok.RequiredArgsConstructor;
 import org.andrey.spring.database.repository.CompanyRepository;
 import org.andrey.spring.dto.CompanyReadDto;
-import org.andrey.spring.listener.AccessType;
-import org.andrey.spring.listener.EntityEvent;
+import org.andrey.spring.listener.entity.AccessType;
+import org.andrey.spring.listener.entity.EntityEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class CompanyService {
         return companyRepository.findById(id)
                 .map(entity -> {
                     eventPublisher.publishEvent(new EntityEvent(entity, AccessType.READ));
-                    return new CompanyReadDto(entity.getId());
+                    return new CompanyReadDto(entity.getId(), null);
                 });
     }
 }

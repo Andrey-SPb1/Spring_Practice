@@ -3,6 +3,8 @@ package org.andrey.spring.dto;
 import lombok.Value;
 import lombok.experimental.FieldNameConstants;
 import org.andrey.spring.database.entity.Role;
+import org.andrey.spring.validation.UserInfo;
+import org.andrey.spring.validation.group.CreateAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 
 @Value
 @FieldNameConstants
+@UserInfo(groups = CreateAction.class)
 public class UserCreateEditDto {
 
     @Email
@@ -20,11 +23,9 @@ public class UserCreateEditDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate birthDate;
 
-    @NotNull
     @Size(min = 3, max = 64)
     String firstname;
 
-    @NotNull
     String lastname;
 
     Role role;

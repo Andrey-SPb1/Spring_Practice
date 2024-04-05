@@ -1,7 +1,9 @@
 package org.andrey.spring.http.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.andrey.spring.database.entity.Role;
 import org.andrey.spring.dto.UserCreateEditDto;
+import org.andrey.spring.service.CompanyService;
 import org.andrey.spring.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class UserController {
 
     private final UserService userService;
+    private final CompanyService companyService;
 
     @GetMapping
     public String findAll(Model model) {
@@ -27,6 +30,8 @@ public class UserController {
         return userService.findById(id)
                 .map(user -> {
                     model.addAttribute("user", user);
+                    model.addAttribute("roles", Role.values());
+                    model.addAttribute("companies", companyService.findAll());
                     return "user/user";
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

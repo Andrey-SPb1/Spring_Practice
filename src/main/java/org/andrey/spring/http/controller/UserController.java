@@ -3,6 +3,7 @@ package org.andrey.spring.http.controller;
 import lombok.RequiredArgsConstructor;
 import org.andrey.spring.database.entity.Role;
 import org.andrey.spring.dto.UserCreateEditDto;
+import org.andrey.spring.dto.UserReadDto;
 import org.andrey.spring.service.CompanyService;
 import org.andrey.spring.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/users")
@@ -37,9 +39,21 @@ public class UserController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/registration")
+    public String registration(Model model, @ModelAttribute("user") UserCreateEditDto user) {
+        model.addAttribute("user", user);
+        model.addAttribute("roles", Role.values());
+        model.addAttribute("companies", companyService.findAll());
+        return "user/registration";
+    }
+
     @PostMapping
 //    @ResponseStatus(HttpStatus.CREATED)
-    public String create(@ModelAttribute UserCreateEditDto user) { // @ModelAttribute is not required
+    public String create(@ModelAttribute UserCreateEditDto user, RedirectAttributes redirectAttributes) { // @ModelAttribute is not required
+//        if (true) {
+//            redirectAttributes.addFlashAttribute("user", user);
+//            return "redirect:/users/registration";
+//        }
         return "redirect:/users/" + userService.create(user).getId();
     }
 

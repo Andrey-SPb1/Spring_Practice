@@ -1,7 +1,6 @@
 package org.andrey.spring.http.rest;
 
 import lombok.RequiredArgsConstructor;
-import org.andrey.spring.database.entity.Role;
 import org.andrey.spring.dto.PageResponse;
 import org.andrey.spring.dto.UserCreateEditDto;
 import org.andrey.spring.dto.UserFilter;
@@ -13,13 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.groups.Default;
 
@@ -44,8 +39,8 @@ public class UserRestController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public String create(@Validated({Default.class, CreateAction.class}) @RequestBody UserCreateEditDto user) {
-        return "redirect:/users/" + userService.create(user).getId();
+    public UserReadDto create(@Validated({Default.class, CreateAction.class}) @RequestBody UserCreateEditDto user) {
+        return userService.create(user);
     }
 
     @PutMapping("/{id}")

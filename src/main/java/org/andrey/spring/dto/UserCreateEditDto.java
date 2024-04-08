@@ -6,6 +6,7 @@ import org.andrey.spring.database.entity.Role;
 import org.andrey.spring.validation.UserInfo;
 import org.andrey.spring.validation.group.CreateAction;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -31,4 +32,6 @@ public class UserCreateEditDto {
     Role role;
 
     Integer companyId;
+
+    MultipartFile image;
 }

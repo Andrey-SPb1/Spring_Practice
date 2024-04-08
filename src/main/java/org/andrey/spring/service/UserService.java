@@ -3,6 +3,7 @@ package org.andrey.spring.service;
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.andrey.spring.database.entity.User;
 import org.andrey.spring.database.querydsl.QPredicates;
 import org.andrey.spring.database.repository.UserRepository;
 import org.andrey.spring.dto.UserCreateEditDto;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -52,6 +54,13 @@ public class UserService {
     public Optional<UserReadDto> findById(Long id) {
         return userRepository.findById(id)
                 .map(userReadMapper::map);
+    }
+
+    public Optional<byte[]> findAvatar(Long id) {
+        return userRepository.findById(id)
+                .map(User::getImage)
+                .filter(StringUtils::hasText)
+                .flatMap(imageService::get);
     }
 
     @Transactional

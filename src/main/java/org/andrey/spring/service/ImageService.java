@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.Optional;
 
 import static java.nio.file.StandardOpenOption.CREATE;
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
@@ -28,6 +29,12 @@ public class ImageService {
             Files.createDirectories(fullImagePath.getParent());
             Files.write(fullImagePath, content.readAllBytes(), CREATE, TRUNCATE_EXISTING);
         }
+    }
+
+    @SneakyThrows
+    public Optional<byte[]> get(String imagePath) {
+        Path fullImagePath = Path.of(bucket, imagePath);
+        return Files.exists(fullImagePath) ? Optional.of(Files.readAllBytes(fullImagePath)) : Optional.empty();
     }
 
 }

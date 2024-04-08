@@ -4,20 +4,15 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQuery;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
-import org.andrey.spring.database.entity.Company;
 import org.andrey.spring.database.entity.Role;
 import org.andrey.spring.database.entity.User;
 import org.andrey.spring.database.querydsl.QPredicates;
 import org.andrey.spring.dto.PersonalInfo;
 import org.andrey.spring.dto.UserFilter;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 

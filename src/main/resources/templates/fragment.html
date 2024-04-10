@@ -6,9 +6,10 @@
 </head>
 <body>
   <div th:fragment="header">
-    <form action="/logout" method="post">
-      <button type="submit">Logout</button>
-    </form>
+      <span th:text="${#authentication.principal.username}">Username</span>
+      <form action="/logout" method="post">
+          <button type="submit">Logout</button>
+      </form>
   </div>
 </body>
 </html>

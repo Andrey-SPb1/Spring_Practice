@@ -59,7 +59,7 @@ public class UserService implements UserDetailsService {
                 .toList();
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
 //    @PostAuthorize("returnObject")
     public Optional<UserReadDto> findById(Long id) {
         return userRepository.findById(id)

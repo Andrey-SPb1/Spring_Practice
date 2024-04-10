@@ -10,6 +10,7 @@ import org.andrey.spring.integration.annotation.IT;
 import org.andrey.spring.service.UserService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.LocalDate;
@@ -43,11 +44,13 @@ public class UserServiceIT extends IntegrationTestBase {
     void create() {
         UserCreateEditDto userDto = new UserCreateEditDto(
                 "test@gmail.com",
+                "test",
                 LocalDate.now(),
                 "test",
                 "test",
                 Role.USER,
-                COMPANY_ID_GOOGLE
+                COMPANY_ID_GOOGLE,
+                new MockMultipartFile("test", new byte[0])
         );
         UserReadDto actualResult = userService.create(userDto);
 
@@ -63,11 +66,13 @@ public class UserServiceIT extends IntegrationTestBase {
     void update() {
         UserCreateEditDto userDto = new UserCreateEditDto(
                 "test@gmail.com",
+                "test",
                 LocalDate.now(),
                 "test",
                 "test",
                 Role.USER,
-                COMPANY_ID_GOOGLE
+                COMPANY_ID_GOOGLE,
+                new MockMultipartFile("test", new byte[0])
         );
 
         Optional<UserReadDto> actualResult = userService.update(USER_ID_IVAN, userDto);

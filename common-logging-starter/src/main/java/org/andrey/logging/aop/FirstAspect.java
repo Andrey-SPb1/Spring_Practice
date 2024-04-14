@@ -1,63 +1,18 @@
-package org.andrey.spring.aop;
+package org.andrey.logging.aop;
 
 import lombok.extern.slf4j.Slf4j;
-import org.andrey.spring.validation.UserInfo;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
 @Aspect
-@Component
-@Order(1)
 public class FirstAspect {
 
-    /*
-        this - check AOP proxy type class
-        target - check target object class type
-     */
-    @Pointcut("this(org.springframework.data.repository.Repository)")
-//    @Pointcut("target(org.springframework.data.repository.Repository)")
-    public void isRepositoryLayer() {
-    }
-
-    // @annotation - check annotation on the method level
-    @Pointcut("org.andrey.spring.aop.CommonPointcuts.isControllerLayer() && @annotation(org.springframework.web.bind.annotation.GetMapping)")
-    public void hasGetMapping() {
-    }
-
-    /*
-        args - check method param type
-        * - any param type
-        .. - 0+ any params type
-     */
-    @Pointcut("org.andrey.spring.aop.CommonPointcuts.isControllerLayer() && args(org.springframework.ui.Model,..)")
-    public void hasModelParam() {
-    }
-
-    /*
-        args - check annotation on the param type
-        * - any param type
-        .. - 0+ any params type
-     */
-
-    @Pointcut("org.andrey.spring.aop.CommonPointcuts.isControllerLayer() && @args(org.andrey.spring.validation.UserInfo)")
-    public void hasUserInfoParamAnnotation() {
-    }
-
-    // bean - check bean name
-    @Pointcut("bean(*Service)")
-    public void isServiceLayerBean() {
-    }
-
     // execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-pattern(param-pattern) throws-pattern?)
-    @Pointcut("execution(public * org.andrey.spring.service.*Service.findById(*))")
+    @Pointcut("execution(public * org.andrey.*.service.*Service.findById(*))")
     public void anyFindByIdServiceMethod() {
     }
 
